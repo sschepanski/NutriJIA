@@ -1,33 +1,55 @@
-# Early-Life Immune Activation and Risk of House Dust Allergy - Observational Analysis Using the PRINCE Cohort Study
+# NutriJIA – Feasibility, Safety, and Exploratory Clinical Analysis of a Nutritional Intervention
 
 ## Introduction
 
-Clinical observations in pediatrics suggest that early-life infections or immune activation may increase the risk of later allergic sensitization, including house dust mite allergy. Understanding whether such associations are supported by empirical longitudinal data is crucial for refining early prevention strategies and for improving early-life risk stratification.
+Nutritional interventions in pediatric and adolescent populations are increasingly explored as low-threshold strategies to support health, development, and disease management. However, before clinical effectiveness can be meaningfully interpreted, careful evaluation of **feasibility, adherence, and safety** is essential—particularly in vulnerable or developing populations.
 
-The present project uses data from the PRINCE Study (Prenatal Identification of Children’s Health), a prospective observational cohort conducted at the Universitäres Perinatalzentrum, Universitätsklinikum Hamburg-Eppendorf (UKE). The PRINCE Study follows families from the first trimester of pregnancy through childhood, collecting comprehensive prenatal, perinatal, and postnatal data including clinical parameters, questionnaires, and biological samples.
+The NutriJIA project investigates a structured nutritional intervention compared to a control condition, with repeated measurements at baseline and post-intervention. The study places primary emphasis on **feasibility and safety**, while exploratory analyses examine potential clinical signals.
 
-This repository contains the analytical framework to investigate whether early immune activation events are associated with an elevated risk of developing house dust allergy in childhood.
+This repository contains the full analytical workflow for the NutriJIA data, focusing on transparent, reproducible, and methodologically sound evaluation of feasibility, safety parameters, and exploratory clinical outcomes.
 
-## Objective
+## Objectives
 
-The aim of this analysis is to evaluate whether infections or immune activation occurring in early life (prenatal or early postnatal) predict later development of house dust allergy. Specifically, we examine:
-- the association between early-life immune-related events and subsequent allergic outcomes
-- potential confounding factors such as sex, parental atopy, environmental exposures, socioeconomic indicators, and early-life nutrition
-- whether timing of immune activation (prenatal vs. postnatal) modifies allergy risk
+### Primary Objectives (Feasibility & Safety)
 
-The analysis is exploratory but aims to generate clinically meaningful hypotheses for further mechanistic studies.
+The primary aim of this analysis is to assess whether the nutritional intervention is **feasible and safe**. Specifically, we evaluate:
+
+- **Adherence** to the intervention protocol
+- **Safety markers**, including:
+  - Body weight and BMI
+  - Vitamin B12
+  - Transferrin saturation
+  - Zinc
+  - Beta-carotene
+- Changes in safety-relevant parameters from **baseline to post-intervention**
+- Between-group differences (intervention vs. control) with baseline adjustment
+
+These outcomes are treated as **primary**, reflecting the pilot and feasibility-oriented nature of the study.
+
+### Secondary Objectives (Exploratory Clinical Analyses)
+
+Secondary analyses are exploratory and hypothesis-generating, aiming to:
+
+- Examine preliminary clinical effects beyond safety
+- Explore group differences in selected outcomes after baseline adjustment
+- Identify trends that may inform sample size planning and endpoint selection for future confirmatory trials
+
+All secondary analyses are explicitly labeled as exploratory and interpreted accordingly.
 
 ## Methodological Overview
 
-The project uses an observational design based on the PRINCE cohort’s longitudinal data. The analytical workflow includes:
-- preprocessing and harmonization of repeated measures and clinical variables
-- construction of exposure variables describing early-life immune activation
-- definition of outcome variables based on clinically verified house dust allergy markers
-- confounder selection guided by directed acyclic graphs (DAGs) and domain expertise
-- regression-based association models with sensitivity analyses
-- robustness checks including alternative exposure definitions and missing-data handling strategies
+The NutriJIA analysis follows a longitudinal observational/interventional framework with repeated measures. Key methodological components include:
 
-All analyses are performed in R, following reproducible research principles.
+- Data cleaning, preprocessing, and harmonization of visit-level data
+- Explicit handling of baseline (visit 0) and post-intervention (follow-up) measurements
+- Definition of adherence and safety endpoints based on clinical thresholds and distributional properties
+- Between-group comparisons using baseline-adjusted models (e.g., ANCOVA-style regression)
+- Transparent reporting of missing data patterns
+- Sensitivity and robustness checks where appropriate
+
+The analytical emphasis is on **clarity, interpretability, and reproducibility**, rather than overfitting or confirmatory inference.
+
+All analyses are performed in Python, following reproducible research principles.
 
 ## Project Structure
 
@@ -41,24 +63,28 @@ All analyses are performed in R, following reproducible research principles.
 
 ## Acknowledgements
 
-Statistical analysis and methodological development were conducted by
-**Dr. Steven Ngandeu Schepanski.** The PRINCE Study team at the Universitätsklinikum Hamburg-Eppendorf is gratefully acknowledged for providing access to the cohort data.
+Statistical analysis and methodological development were conducted by **Dr. Steven Ngandeu Schepanski.**
 
 ## Getting Started
 
 1. **Clone this repository:**
 
    ```bash
-   git clone https://github.com/sschepanski/HouseDust_PRINCE.git
+   git clone https://github.com/sschepanski/NutriJIA.git
    ```
-2. **Set up your R environment:**
-   Ensure that R is installed and configured. All required packages are integrated directly in the respective R scripts. When running a script, any missing packages will be prompted for installation.
-3. **Run the provided R scripts:**
-   Execute the R scripts found in the scr/ directory for data preprocessing, modeling, and assumption testing. Set your working directory to the root of the project to ensure smooth execution of the scripts.
+2. **Set up your enviornment using the provided requirement file:**
+   ```bash
+   pyenv local 3.11.3
+   python -m venv .venv
+   source .venv/bin/activate
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+3. **Run the provided notebooks in the `scr/` directory for data preprocessing, model training, and evaluation.**
 
 ## Contributions
 
-This repository is part of an ongoing research collaboration investigating early-life determinants of childhood health, with a focus on immune development and allergic disease.
+This project analysis was conducted by **Dr. Steven Ngandeu Schepanski**. It is part of the manuscript by Ngoumou et al.
 
 ## License
 
